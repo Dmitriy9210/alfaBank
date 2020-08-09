@@ -7,16 +7,13 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TestAlfaBankDeposit {
 
-    @BeforeEach
-    public void setUp() {
-
-    }
+public class TestAlfaBankDepositTests {
 
     @Test
-    public void openArchiveDeposit() {
+    public void openArchiveDepositTest() {
         open("https://alfabank.ru/make-money/savings-account/");
+        
         //переходим по Депозитам
         $(".navigation").$(byText("Депозиты")).click();
         //проверяем переключилась ли страница и появилось ли окно Депозиты
@@ -25,9 +22,8 @@ public class TestAlfaBankDeposit {
         $("html").$(byText("Архивные депозиты")).click();
         //проверяем, что перешли в Архивные депозиты
         $(".layout__content.content").should(text("Архивные депозиты"));
-//проверяем, что 3 пункта
-        $$(".product-cell__cell").shouldHave(size(3));
-        //todo проыеряем, что элементы видимы, возможно не правильно реализовал и проверка не работает
-        $$(".product-cell__cell").find(visible);
+
+        //todo проыеряем, что есть 3 видимых элемента
+        $$(".product-cell__cell").filter(visible).shouldHave(size(3));
     }
 }
